@@ -3,12 +3,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.jaxrx</groupId>
-	<artifactId>Advanced-Jaxrs-01</artifactId>
+	<groupId>com.cart</groupId>
+	<artifactId>CartRest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Advanced-Jaxrs-01 Maven Webapp</name>
+	<name>CartRest Maven Webapp</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
 
@@ -24,11 +24,17 @@
 			<artifactId>jersey-media-moxy</artifactId>
 			<version>3.1.0-M8</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.30</version>
+		</dependency>
 	</dependencies>
 
 
 	<build>
-		<finalName>Advanced-Jaxrs-01</finalName>
+		<finalName>cartrest</finalName>
 		<pluginManagement>
 			<!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
 			<plugins>
