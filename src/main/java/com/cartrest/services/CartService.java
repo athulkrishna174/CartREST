@@ -46,7 +46,31 @@ public class CartService {
             }
             
             return items;
-        }
+      }
+    
+    public Item getItem(int userId, int id) {
+        Connection connection = connector.getConnection();
+        
+        String query = "SELECT * FROM cartitems WHERE uid = ? and id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, id);
+            
+            ResultSet rs = statement.executeQuery();
+            
+            Item item = new Item();
+            if(rs.next()) {
+                item.setId(rs.getInt("id"));
+                item.setPid(rs.getInt("pid"));
+                item.setName(rs.getString("name"));
+                item.setQuantity(rs.getInt("quantity"));
+                item.setPrice(rs.getInt("price"));
+            }
+            return item;            
+            }catch (Exception e) {
+                return null;
+            }     
+    }
     
     public boolean deleteItem(int userId, int id){
         Connection connection = connector.getConnection();
@@ -123,4 +147,21 @@ public class CartService {
         return true;
     }
     
+    
+    public boolean updateQuantity(int userId, int id, Item item) {
+        Connection connection = connector.getConnection();
+        
+        String query = "UPDATE cartitems SET quantity = ? , total = ? WHERE uid = ? and id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, item.getQuantity());
+            statement.setInt(2, item.getTotal());
+            statement.setInt(3, userId);
+            statement.setInt(4, id);
+            
+            statement.execute();
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
 }

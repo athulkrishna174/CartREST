@@ -25,8 +25,14 @@ public class CartResource {
     
     @GET
     @Path("/{userId}")
-    public List<Item> getItems(@PathParam("userId") int userId) throws SQLException {
+    public List<Item> getAllItems(@PathParam("userId") int userId) throws SQLException {
         return cartService.getCartItems(userId);
+    }
+    
+    @GET
+    @Path("/{userId}/{id}")
+    public Item getItem(@PathParam("userId") int userId, @PathParam("id") int id){
+        return cartService.getItem(userId, id);
     }
     
     @DELETE
@@ -51,5 +57,11 @@ public class CartResource {
     @Path("/{userId}")
     public boolean updateOrders(@PathParam("userId") int userId, List<Item> items)throws SQLException{
         return cartService.updateMyOrder(userId, items);
+    }
+    
+    @PUT
+    @Path("/{userId}/{id}")
+    public boolean updatQuantity(@PathParam("userId") int userId, @PathParam("id") int id,Item item){
+        return cartService.updateQuantity(userId, id, item);
     }
 }
